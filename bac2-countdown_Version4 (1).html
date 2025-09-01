@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <title>បាក់ឌុប ២០២៦ Countdown</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Hanuman', 'Kantumruy', Arial, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: url(photo_2025-09-01_22-09-50.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            background: rgba(30,30,60,0.85);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            padding: 2em;
+            max-width: 300px;
+            width: 90%;
+            text-align: center;
+        }
+        .bg {
+            background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            filter: blur(98%);
+            backdrop-filter: blur(50%);
+        }
+        h1 { font-size: 2em; margin-bottom: 0.5em; }
+        .countdown { font-size: 1.2em; margin: 24px 0 8px 0; letter-spacing: 1px;}
+        .event-name { font-size: 1em; font-weight: 500; margin-bottom: 0.8em;}
+        #playBtn {
+            margin-top: 1em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4081;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #playBtn:hover {
+            background: #e73370;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 1em; font-size: 1em;}
+            h1 { font-size: 1.3em;}
+            .countdown { font-size: 1em;}
+        }
+    </style>
+    <!-- Khmer font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="container">
+        <h1>ការរាប់ថយក្រោយ បាក់ឌុប ២០២៦</h1>
+        <div class="event-name">ពេលវេលាដល់បាក់ឌុប ២០២៦៖</div>
+        <div class="countdown" id="countdown"></div>
+        <!-- Button ចាក់ភ្លេង -->
+        <audio controls autoplay >
+            <source src="countdown.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        // Countdown logic
+        const targetDateStr = "2026-08-18T07:00:00";
+        const targetDate = new Date(targetDateStr);
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").textContent = "ដល់ថ្ងៃបាក់ឌុបហើយ!";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("countdown").textContent =
+                `${days} ថ្ងៃ ${hours} ម៉ោង ${minutes} នាទី ${seconds} វិនាទី`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
